@@ -2,7 +2,7 @@ const User = require('../action/user');
 const response = require('../utils/response');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const key = require('../key');
+const key = require('../../key');
 const db = require('../database');
 const Team = require('../action/team');
 

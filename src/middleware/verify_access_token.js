@@ -1,6 +1,6 @@
 const response = require('../utils/response');
 const jwt = require('jsonwebtoken');
-const key = require('../key');
+const key = require('../../key');
 
 function verifyAccessToken(req, res, next) {
     const token = req.headers["access_token"];
