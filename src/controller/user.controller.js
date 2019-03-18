@@ -9,12 +9,13 @@ const Team = require('../action/team');
 async function register(req, res) {
     const {
         user_name,
-        password
+        password,
+        email,
+        name
     } = req.body;
     try {
         const contrain = {
-            user_name: user_name,
-            password: password
+            user_name: user_name
         };
         const user = await User.findUser(contrain);
         let pass = /^(?=.*\d)(?=.*[!@#$%_^&*])(?=.*[a-zA-Z]).{8,}$/;
@@ -27,7 +28,8 @@ async function register(req, res) {
             let payload = {
                 user_name: user_name,
                 role_id: 3,
-                email: user_name,
+                email: email,
+                name: name,
                 password: hashPassword,
                 create_time: Date.now()
             };
