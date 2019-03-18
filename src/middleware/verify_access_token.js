@@ -4,7 +4,7 @@ const key = require('../../key');
 
 function verifyAccessToken(req, res, next) {
     console.log("req:", req);
-    const token = req.headers["access_token"];
+    const token = req.headers["token"];
     console.log("Header: ",req.headers);
     console.log(token);
     if (token) {
