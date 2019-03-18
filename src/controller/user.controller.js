@@ -64,7 +64,7 @@ async function login(req, res) {
         } else {
             const sixHours = 6 * 60 * 60;
             if (bcrypt.compareSync(password, user.password)) {
-                const access_token = jwt.sign({
+                const token = jwt.sign({
                         id: user.id,
                         role_id: user.role_id
                     },
@@ -72,7 +72,7 @@ async function login(req, res) {
                         expiresIn: sixHours
                     }
                 );
-                return res.json(response.success({access_token}));
+                return res.json(response.success({token}));
             } else {
                 throw new Error("Mật khẩu không chính xác!");
             }
