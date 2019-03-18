@@ -36,6 +36,9 @@ async function register(req, res) {
             const newUsers = await User.createUser(payload);
             return res.json(response.success({}));
         }
+        else{
+            throw new Error("Tài khoản đã tồn tại.");
+        }
     } catch (err) {
         console.log("Error : ", err.message);
         return res.json(response.fail(err.message));
