@@ -60,7 +60,7 @@ async function login(req, res) {
             }
         });
         if (!user) {
-            throw new Error("Tài khoản không tồn tại !")
+            throw new Error("Tài khoản không tồn tại!")
         } else {
             const sixHours = 6 * 60 * 60;
             if (bcrypt.compareSync(password, user.password)) {
@@ -74,7 +74,7 @@ async function login(req, res) {
                 );
                 return res.json(response.success({access_token}));
             } else {
-                throw new Error("Mật khẩu không chính xác !");
+                throw new Error("Mật khẩu không chính xác!");
             }
 
         }
