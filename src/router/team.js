@@ -7,7 +7,7 @@ router.delete('/:team_id', middleware.verifyAccessToken, Team.deleteTeam);
 router.put('/:team_id', middleware.verifyAccessToken, Team.putTeam);
 router.delete('/:team_id/users/:user_id', middleware.verifyAccessToken, Team.deleteUserInTeam);
 router.get('/:team_id/users', middleware.verifyAccessToken, Team.getUsersInTeam);
-router.post('/teams/users', middleware.verifyAccessToken, Team.addUserToTeam);
+router.post('/users', middleware.verifyAccessToken, Team.addUserToTeam);
 
 
 module.exports = router;

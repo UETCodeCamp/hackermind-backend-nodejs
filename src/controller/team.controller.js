@@ -1,6 +1,7 @@
 const response = require('../utils/response');
 const Team = require('../action/team');
 const User = require('../action/user');
+const db = require('../database');
 
 async function createTeam(req, res) {
     try{
