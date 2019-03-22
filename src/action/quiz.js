@@ -3,30 +3,35 @@ const db = require('../database');
 module.exports.createQuiz = async (payload) => {
     const quiz = await db.QuizModel.create(payload);
     return quiz;
-}
+};
 
-module.exports.putQuiz = async (contrain, payload) => {
-    const quiz = await db.QuizModel.update(payload, {
+module.exports.updateQuiz = async (contrain, payload) => {
+    const quiz = await db.QuizModel.update(paylaod, {
         where: contrain
     });
     return quiz;
 };
 
-module.exports.getQuizzes = async (contrain) => {
-    const quizzes = await db.QuizModel.findAll({
+module.exports.getQuiz = async (contrain) => {
+    const quiz = await db.QuizModel.findOne({
         where: contrain,
-        order: [
-            ['create_time', 'DESC']
-        ],
-        attributes: ['id','question', 'description', 'url', 'answer_one', 'answer_two', 'answer_three', 'answer_four', 'chapter_id']
-    }) ;
-    return quizzes;
-};
-
-
-module.exports.deleteQuiz = async (contrain) => {
-    const quiz = await db.QuizModel.destroy({
-        where: contrain
+        include: [
+            {
+                model: db.QuestionModel,
+                attributes: ['id', 'type', 'title', 'description'],
+                order: [
+                    ['create_time', 'DESC']
+                ],
+                include: [
+                    {
+                        model: db.AnswerModel,
+                        order: [
+                            ['position', 'DESC']
+                        ]
+                    }
+                ]
+            }
+        ]
     });
     return quiz;
 };

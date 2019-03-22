@@ -1,25 +1,25 @@
 module.exports = (sequelize, Sequelize) => {
-    const ChapterModel = sequelize.define('chapters', {
+    const UserQuestionModel = sequelize.define('users_questions', {
         id: {
             type: Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        name: {
-            type: Sequelize.STRING
-        },
-        create_time: {
-            type: Sequelize.STRING
-        },
-        course_id: {
+        user_id: {
             type: Sequelize.INTEGER
         },
-        description: {
+        question_id: {
+            type: Sequelize.INTEGER
+        },
+        choose_answer: {
+            type: Sequelize.STRING
+        },
+        is_correct: {
             type: Sequelize.STRING
         }
     },{
         freezeTableName: true,
         timestamp: false
     });
-    return ChapterModel;
+    return UserQuestionModel;
 };

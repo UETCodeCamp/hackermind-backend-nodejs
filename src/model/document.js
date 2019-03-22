@@ -1,25 +1,25 @@
 module.exports = (sequelize, Sequelize) => {
-    const ChapterModel = sequelize.define('chapters', {
+    const DocumentModel = sequelize.define('documents', {
         id: {
             type: Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        name: {
+        title: {
             type: Sequelize.STRING
         },
         create_time: {
             type: Sequelize.STRING
         },
-        course_id: {
-            type: Sequelize.INTEGER
+        content: {
+            type: Sequelize.TEXT
         },
-        description: {
-            type: Sequelize.STRING
+        chapter_id: {
+            type: Sequelize.INTEGER
         }
     },{
         freezeTableName: true,
         timestamp: false
     });
-    return ChapterModel;
+    return DocumentModel;
 };

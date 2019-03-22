@@ -5,9 +5,9 @@ const Video = require('../action/video');
 async function createVideo(req, res) {
     try{
         const {chapter_id} = req.params;
-        const {name, url, description} = req.body;
+        const {title, url, description} = req.body;
         const payload = {
-            name: name,
+            title: title,
             url: url,
             description: description,
             create_time: Date.now(),
@@ -33,9 +33,9 @@ async function createVideo(req, res) {
 async function putVideo() {
     try{
         const {chapter_id, video_id} = req.params;
-        const {name, url, description} = req.body;
+        const {title, url, description} = req.body;
         const payload = {
-            name: name,
+            title: title,
             url: url,
             description: description
         };

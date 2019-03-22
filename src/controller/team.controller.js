@@ -119,6 +119,7 @@ async function addUserToTeam(req, res){
         return res.json(response.fail(err.message));
     }
 }
+
 module.exports = {
     createTeam,
     deleteTeam,

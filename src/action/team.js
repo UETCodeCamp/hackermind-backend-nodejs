@@ -76,3 +76,15 @@ module.exports.deleteUserInTeam = async (contrain) => {
     return user;
 };
 
+
+module.exports.getTeamMate = async (contrain) => {
+    const team = await db.TeamUserModel.findOne({
+        where: contrain,
+        include: [{
+            model: db.UserModel,
+            attributes: ['name', 'avatar']
+        }]
+    });
+    return team;
+};
+

@@ -62,7 +62,7 @@ async function login(req, res) {
         if (!user) {
             throw new Error("Tài khoản không tồn tại!")
         } else {
-            const sixHours = 6 * 60 * 60;
+            const sixHours = 6 * 60 * 60 * 10;
             if (bcrypt.compareSync(password, user.password)) {
                 const token = jwt.sign({
                         id: user.id,
@@ -150,11 +150,24 @@ async function changeRole(req, res) {
     }
 }
 
+async function getTeamMate(req, res){
+    const {team_id} = req.params;
+    try{
+        const team = await Team.getTeamMate({team_id: team_id});
+        return res.json(response.success({team}));
+    }
+    catch(err){
+        console.log("Error:", err.message);
+        return res.json(response.fail(err.message));
+    }
+}
+
 module.exports = {
     register,
     login,
     getProfile,
     putProfile,
     getTeams,
-    changeRole
+    changeRole,
+    getTeamMate
 };

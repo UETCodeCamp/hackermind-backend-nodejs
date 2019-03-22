@@ -33,14 +33,16 @@ db.Sequelize = Sequelize;
 db.UserModel = require('./model/user')(sequelize, Sequelize);
 db.CourseModel = require('./model/course')(sequelize, Sequelize);
 db.ChapterModel = require('./model/chapter')(sequelize, Sequelize);
-db.QuizModel = require('./model/quiz')(sequelize, Sequelize);
 db.RoleModel = require('./model/role')(sequelize, Sequelize);
 db.TeamModel = require('./model/team')(sequelize, Sequelize);
 db.TeamUserModel = require('./model/team_user')(sequelize, Sequelize);
 db.TeamCourseModel = require('./model/team_course')(sequelize, Sequelize);
 db.ThreadModel = require('./model/thread')(sequelize, Sequelize);
 db.VideoModel = require('./model/video')(sequelize, Sequelize);
-
+db.QuestionModel = require('./model/question')(sequelize, Sequelize);
+db.AnswerModel = require('./model/answer')(sequelize, Sequelize);
+db.QuizModel = require('./model/quiz')(sequelize, Sequelize);
+db.DocumentModel = require('./model/document')(sequelize, Sequelize);
 
 /* associations */
 
@@ -70,14 +72,25 @@ db.ChapterModel.belongsTo(db.CourseModel, {foreignKey: 'course_id', targetKey: '
 db.ChapterModel.hasMany(db.VideoModel, {foreignKey: 'chapter_id', sourceKey: 'id'});
 db.VideoModel.belongsTo(db.ChapterModel, {foreignKey: 'chapter_id', targetKey: 'id'});
 
-//Chapter-Quiz
-db.ChapterModel.hasMany(db.QuizModel, {foreignKey: 'chapter_id', sourceKey: 'id'});
-db.QuizModel.belongsTo(db.ChapterModel, {foreignKey: 'chapter_id', targetKey: 'id'});
-
+//Chapter-Document
+db.ChapterModel.hasMany(db.DocumentModel, {foreignKey: 'chapter_id', sourceKey: 'id'});
+db.DocumentModel.belongsTo(db.ChapterModel, {foreignKey: 'chapter_id', targetKey: 'id'});
 
 //User-Thread
 db.UserModel.hasMany(db.ThreadModel, {foreignKey: 'user_id', sourceKey: 'id'});
 db.ThreadModel.belongsTo(db.UserModel, {foreignKey: 'user_id', targetKey: 'id'});
+
+//Chapter-Quiz
+db.ChapterModel.hasMany(db.QuizModel, {foreignKey: 'chapter_id', sourceKey: 'id'});
+db.QuizModel.belongsTo(db.ChapterModel, {foreignKey: 'chapter_id', targetKey: 'id'});
+
+//Quiz-Question
+db.QuizModel.hasMany(db.QuestionModel, {foreignKey: 'quiz_id', sourceKey: 'id'});
+db.QuestionModel.belongsTo(db.QuizModel, {foreignKey: 'quiz_id', targetKey: 'id'});
+
+//Question-answer
+db.QuestionModel.hasMany(db.AnswerModel, {foreignKey: 'question_id', sourceKey: 'id'});
+db.AnswerModel.belongsTo(db.QuestionModel, {foreignKey: 'question_id', targetKey: 'id'});
 
 
 module.exports = db;

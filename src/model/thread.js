@@ -19,6 +19,9 @@ module.exports = (sequelize, Sequelize) => {
         },
         user_id: {
             type: Sequelize.INTEGER
+        },
+        create_time: {
+            type: Sequelize.STRING
         }
     }, {
         freezeTableName: true,

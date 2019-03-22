@@ -1,6 +1,5 @@
 const response = require('../utils/response');
 const Course = require('../action/course');
-const Team = require('../action/team');
 const db = require('../database');
 
 async function getAllCourses(req, res) {

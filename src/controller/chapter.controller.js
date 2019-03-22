@@ -4,12 +4,13 @@ const Chapter = require('../action/chapter');
 
 async function createChapter(req, res) {
     const {course_id} = req.params;
-    const {name} = req.body;
+    const {name, description} = req.body;
     try{
         const payload = {
             name: name,
             course_id: course_id,
-            create_time: Date.now()
+            create_time: Date.now(),
+            description: description
         };
         const chapter = await Chapter.createChapter(payload);
         return res.json(response.success({}));

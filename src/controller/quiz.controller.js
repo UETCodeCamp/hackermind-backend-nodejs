@@ -1,88 +1,64 @@
 const response = require('../utils/response');
 const Quiz = require('../action/quiz');
+
 async function createQuiz(req, res) {
-    const {question, url, description, answer_one, answer_two, answer_three, answer_four, answer_correct} = req.body;
-    const {chapter_id} = req.params;
-    const payload = {
-        question: question,
-        url: url,
-        description: description,
-        answer_correct: answer_correct,
-        answer_four: answer_four,
-        answer_one:answer_one,
-        answer_two: answer_two,
-        answer_three: answer_three,
-        chapter_id: chapter_id
-    };
-    try{
-        const quiz = await Quiz.createQuiz(payload);
-        return res.json(response.success({}));
-    }
-    catch(err){
-        console.log("Error:", err.message);
-        return res.json(response.fail(err.message));
-    }
+      const {chapter_id} = req.params;
+      const  {title, description} = req.body;
+      const payload = {
+          title: title,
+          description: description,
+          chapter_id: chapter_id,
+          create_time: Date.now()
+      };
+      try{
+          const quiz = await Quiz.createQuiz(payload);
+          return res.json(response.success({}));
+      }
+      catch(err){
+          console.log("Error: ", err);
+          return res.json(response.fail(err.message))
+      }
 }
 
 async function putQuiz(req, res){
-    const {question, url, description, answer_one, answer_two, answer_three, answer_four, answer_correct} = req.body;
     const {chapter_id, quiz_id} = req.params;
+    const  {title, description} = req.body;
     const payload = {
-        question: question,
-        url: url,
-        description: description,
-        answer_correct: answer_correct,
-        answer_four: answer_four,
-        answer_one:answer_one,
-        answer_two: answer_two,
-        answer_three: answer_three
+        title: title,
+        description: description
     };
     const contrain = {
-        chapter_id: chapter_id,
-        id: quiz_id
+        id: quiz_id,
+        chapter_id: chapter_id
     };
     try{
-        const quiz = await Quiz.putQuiz(contrain, payload);
-        return res.json(response.success({}));
+        const quiz = await Quiz.updateQuiz(contrain,payload);
+        return res.json(response.success());
     }
     catch(err){
-        console.log("Error:", err.message);
-        return res.json(response.fail(err.message));
+        console.log("Error: ", err);
+        return res.json(response.fail(err.message))
     }
 }
 
-async function getQuizzes(req, res) {
-    const {chapter_id} = req.params;
+async function getQuiz(req, res){
+    const {chapter_id, quiz_id} = req.params;
+    const contrain = {
+        id: quiz_id,
+        chapter_id: chapter_id
+    };
     try{
-        const quizzes = await Quiz.getQuizzes({chapter_id: chapter_id});
-        return res.json(response.success(quizzes));
+        const quiz = await Quiz.getQuiz(contrain);
+        return res.json(response.success({quiz}));
     }
     catch(err){
-        console.log("Error:", err.message);
-        return res.json(response.fail(err.message));
-    }
-}
-
-async function deleteQuiz(req, res){
-    const {quiz_id, chapter_id} = req.params;
-    try{
-        const contrain = {
-            id: quiz_id,
-            chapter_id: chapter_id
-        };
-        const quiz = await Quiz.deleteQuiz(contrain);
-        return res.json(response.success({}));
-    }
-    catch(err){
-        console.log("Error:", err.message);
-        return res.json(response.fail(err.message));
+        console.log("Error: ", err);
+        return res.json(response.fail(err.message))
     }
 }
 
 module.exports = {
     createQuiz,
-    getQuizzes,
-    deleteQuiz,
-    putQuiz
+    putQuiz,
+    getQuiz
 };
-

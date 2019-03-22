@@ -18,6 +18,29 @@ module.exports.getChapter = async (contrain) => {
         where: contrain,
         order: [
             ['create_time', 'DESC']
+        ],
+        include: [
+            {
+                model: db.VideoModel,
+                attributes: ['title', 'id'],
+                order: [
+                    ['create_time', 'DESC']
+                ]
+            },
+            {
+                model: db.QuizModel,
+                attributes: ['title', 'id'],
+                order: [
+                    ['create_time', 'DESC']
+                ]
+            },
+            {
+                model: db.DocumentModel,
+                attributes: ['title', 'id'],
+                order: [
+                    ['create_time', 'DESC']
+                ]
+            }
         ]
     });
     return chapters;
