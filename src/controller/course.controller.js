@@ -46,7 +46,7 @@ async function putCourse(req, res){
             image: image,
             create_time: Date.now()
         };
-        const course = await Course.updateCourse(payload, {course: course_id});
+        const course = await Course.updateCourse(payload, {id: course_id});
         return res.json(response.success({}));
     }
     catch(err){

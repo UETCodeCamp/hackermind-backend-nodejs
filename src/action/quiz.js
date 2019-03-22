@@ -13,23 +13,24 @@ module.exports.updateQuiz = async (contrain, payload) => {
 };
 
 module.exports.getQuiz = async (contrain) => {
-    const quiz = await db.QuizModel.findOne({
+    console.log(contrain);
+    const quiz = await db.QuizModel.findAll({
         where: contrain,
         include: [
             {
                 model: db.QuestionModel,
-                attributes: ['id', 'type', 'title', 'description'],
-                order: [
-                    ['create_time', 'DESC']
-                ],
-                include: [
-                    {
-                        model: db.AnswerModel,
-                        order: [
-                            ['position', 'DESC']
-                        ]
-                    }
-                ]
+                // attributes: ['id', 'type', 'title', 'description'],
+                // order: [
+                //     ['create_time', 'DESC']
+                // ],
+                include: {
+                    model: db.AnswerModel,
+                    required: false
+                    // order: [
+                    //     ['position', 'DESC']
+                    // ],
+                    // limit: 2
+                }
             }
         ]
     });
