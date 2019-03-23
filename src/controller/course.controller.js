@@ -141,7 +141,9 @@ async function checkActiveToLearn(req, res){
     const {course_id} = req.params;
     try{
         const team = await db.TeamUserModel.findOne({
-            user_id: req.tokenData.id
+            where: {
+                user_id: req.tokenData.id
+            }
         });
         const course = await db.TeamCourseModel.findOne({
             where: {
