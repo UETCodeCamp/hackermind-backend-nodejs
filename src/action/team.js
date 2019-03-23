@@ -78,13 +78,25 @@ module.exports.deleteUserInTeam = async (contrain) => {
 
 
 module.exports.getTeamMate = async (contrain) => {
-    const team = await db.TeamUserModel.findOne({
-        where: contrain,
-        include: [{
-            model: db.UserModel,
-            attributes: ['name', 'avatar', 'role_id']
-        }]
+    const team = await db.TeamModel.findOne({
+        where: {
+            id: contrain.team_id
+        }
     });
+    const team_users = await db.TeamUserModel.findll({
+        where: contrain
+    });
+    let user_id = team_users.map(e => {
+        return e.dataValues.user_id
+    });
+    const users = await db.UserModel.findAll({
+        where: {
+            user_id: {
+                [db.Sequelize.Op.in]: user_id
+            }
+        }
+    });
+    team.dataValues.users = users;
     return team;
 };
 
