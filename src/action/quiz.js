@@ -35,6 +35,7 @@ module.exports.getQuiz = async (contrain, user_id, is_do) => {
         ]
     });
     if(is_do){
+        let point = 0;
         quiz = quiz.dataValues;
         quiz.questions = quiz.questions.map(e => {
             return e.dataValues
@@ -47,9 +48,13 @@ module.exports.getQuiz = async (contrain, user_id, is_do) => {
                     question_id: quiz.questions[i].id
                 }
             });
+            if(user_question.is_correct){
+                point+=10;
+            }
             quiz.questions[i].choose_answer = user_question.dataValues.choose_answer
         }
         quiz.is_do = is_do;
+        quiz.point = point;
     }
     return quiz;
 };
