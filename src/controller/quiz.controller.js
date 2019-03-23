@@ -1,6 +1,7 @@
 const response = require('../utils/response');
 const Quiz = require('../action/quiz');
 const db = require('../database');
+const Check = require('../utils/parseAnswer');
 
 async function createQuiz(req, res) {
       const {chapter_id} = req.params;
@@ -70,11 +71,8 @@ async function checkQuiz(req, res){
                     id: questions[i].question_id
                 }
             });
-            let answer_correct = question.answer_correct.split(',');
-            if(answer_correct.length === questions[i].choose_answer.length){
-                count++;
-            }
-            console.log(count);
+
+            console.log(parseAnswer.parseAnswer());
         }
         return res.json(response.success({}));
     }
