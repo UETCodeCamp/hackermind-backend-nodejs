@@ -49,6 +49,7 @@ module.exports.getQuiz = async (contrain, user_id, is_do) => {
             });
             quiz.questions[i].choose_answer = user_question.dataValues.choose_answer
         }
+        quiz.is_do = is_do;
     }
     return quiz;
 };
