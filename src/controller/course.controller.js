@@ -164,16 +164,21 @@ async function checkActiveToLearn(req, res){
                 ],
                 limit: 1
             });
-            const video = await db.VideoModel.findAll({
-                where: {
-                    chapter_id: chapter[0].dataValues.id
-                },
-                order: [
-                    ['create_time', 'ASC']
-                ],
-                limit: 1
-            });
-            return res.json(response.success(video));
+            if(chapter){
+                const video = await db.VideoModel.findAll({
+                    where: {
+                        chapter_id: chapter[0].dataValues.id
+                    },
+                    order: [
+                        ['create_time', 'ASC']
+                    ],
+                    limit: 1
+                });
+                return res.json(response.success(video));
+            }
+            else{
+                throw new Error("Khóa học đang được cập nhật. Vui lòng quay lại sau.");
+            }
         }
     }
     catch(err){
