@@ -85,6 +85,41 @@ async function login(req, res) {
     }
 }
 
+async function changePassword(req, res) {
+    const {oldPassword, newPassword} = req.body;
+    try {
+        const user = await db.UserModel.findOne({
+            where: {
+                id: req.tokenData.id
+            }
+        });
+        if (!user) {
+            throw new Error("Tài khoản không tồn tại!")
+        } else {
+            if (bcrypt.compareSync(oldPassword, user.password)) {
+                if(newPassword.length < 8){
+                    throw new Error("Mật khẩu phải có ít nhất 8 kí tự.");
+                }
+                let salt = await bcrypt.genSalt(10);
+                let hashPassword = await bcrypt.hash(newPassword, salt);
+                await db.UserModel.update({
+                    password: hashPassword
+                },{
+                    where: {
+                        id: req.tokenData.id
+                    }
+                });
+                return res.json(response.success({}));
+            } else {
+                throw new Error("Mật khẩu không chính xác!");
+            }
+
+        }
+    } catch (err) {
+        console.log("Error: ", err.message);
+        return res.json(response.fail(err.message));
+    }
+}
 async function getProfile(req, res) {
     try {
         const user_id = req.tokenData.id;
@@ -170,5 +205,6 @@ module.exports = {
     putProfile,
     getTeams,
     changeRole,
-    getTeamMate
+    getTeamMate,
+    changePassword
 };

@@ -10,7 +10,7 @@ router.put('/profiles', middleware.verifyAccessToken, User.putProfile);
 router.get('/teams', middleware.verifyAccessToken, User.getTeams);
 router.get('/teams/:team_id/teammates', middleware.verifyAccessToken, User.getTeamMate);
 router.put('/roles', middleware.verifyAccessToken, User.changeRole);
-
+router.put('/password', middleware.verifyAccessToken, User.changePassword);
 
 
 module.exports = router;
