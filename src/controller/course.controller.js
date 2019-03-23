@@ -19,7 +19,7 @@ async function getAllCourses(req, res) {
 
 async function getCourse(req, res) {
     try{
-        const {course_id} = req.param;
+        const {course_id} = req.params;
         const course = await db.CourseModel.findOne({
             where: {
                 id: course_id
