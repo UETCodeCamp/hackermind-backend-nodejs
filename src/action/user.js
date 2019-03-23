@@ -6,7 +6,6 @@ module.exports.findUser = async (contrain) => {
             user_id: contrain.id
         }
     });
-    console.log(team);
     const user = await db.UserModel.findOne({
         where: contrain,
         attributes: ['user_name','id', 'avatar', 'name', 'email', 'point', 'description', 'role_id']
