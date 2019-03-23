@@ -91,7 +91,7 @@ module.exports.getTeamMate = async (contrain) => {
     });
     const users = await db.UserModel.findAll({
         where: {
-            user_id: {
+            id: {
                 [db.Sequelize.Op.in]: user_id
             }
         },
