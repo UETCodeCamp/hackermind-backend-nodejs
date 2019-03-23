@@ -14,7 +14,7 @@ module.exports.updateQuiz = async (contrain, payload) => {
 
 module.exports.getQuiz = async (contrain) => {
     console.log(contrain);
-    const quiz = await db.QuizModel.findAll({
+    const quiz = await db.QuizModel.findOne({
         where: contrain,
         include: [
             {
