@@ -82,7 +82,7 @@ module.exports.getTeamMate = async (contrain) => {
         where: contrain,
         include: [{
             model: db.UserModel,
-            attributes: ['name', 'avatar']
+            attributes: ['name', 'avatar', 'role_id']
         }]
     });
     return team;
