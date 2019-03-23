@@ -95,7 +95,7 @@ module.exports.getTeamMate = async (contrain) => {
                 [db.Sequelize.Op.in]: user_id
             }
         },
-        attributes: ['name', 'avater', 'email', 'role_id']
+        attributes: ['name', 'avatar', 'email', 'role_id']
     });
     team.dataValues.users = users;
     return team;
