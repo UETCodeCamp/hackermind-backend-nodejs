@@ -174,7 +174,7 @@ async function checkActiveToLearn(req, res){
                     ],
                     limit: 1
                 });
-                return res.json(response.success(video));
+                return res.json(response.success(video[0]));
             }
             else{
                 throw new Error("Khóa học đang được cập nhật. Vui lòng quay lại sau.");
