@@ -37,7 +37,8 @@ async function register(req, res) {
                 email: email,
                 name: name,
                 password: hashPassword,
-                create_time: Date.now()
+                create_time: Date.now(),
+                avatar: "/img/avatar.png"
             };
             const newUsers = await User.createUser(payload);
             return res.json(response.success({}));
