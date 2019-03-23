@@ -19,16 +19,13 @@ module.exports.getQuiz = async (contrain) => {
         include: [
             {
                 model: db.QuestionModel,
-                // attributes: ['id', 'type', 'title', 'description'],
-                // order: [
-                //     ['create_time', 'DESC']
-                // ],
+                attributes: ['id', 'type', 'title', 'description'],
+                order: [
+                    ['create_time', 'ASC']
+                ],
                 include: [{
-                    model: db.AnswerModel
-                    // order: [
-                    //     ['position', 'DESC']
-                    // ],
-                    // limit: 2
+                    model: db.AnswerModel,
+                    order: ['position', 'ASC']
                 }]
             }
         ]

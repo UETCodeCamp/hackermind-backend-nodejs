@@ -13,6 +13,5 @@ module.exports = (sequelize, Sequelize) => {
         freezeTableName: true,
         timestamp: false
     });
-    AnswerModel.removeAttribute('id');
     return AnswerModel;
 };

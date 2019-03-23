@@ -72,8 +72,8 @@ async function getVideo(req, res) {
             chapter_id: chapter_id,
             id: video_id
         };
-        const video = await Video.getVideo(contrain);
-        return res.json(response.success({video}));
+        const data = await Video.getVideo(contrain);
+        return res.json(response.success(data));
     }
     catch(err){
         console.log("Error: ", err.message);

@@ -25,7 +25,7 @@ module.exports.getVideos = async (contrain) => {
 
 
 module.exports.getVideo = async (contrain) => {
-    const video = await db.VideoModel.findOne({
+    let video = await db.VideoModel.findOne({
         where: contrain
 
     });
@@ -43,8 +43,7 @@ module.exports.getVideo = async (contrain) => {
     comments = comments.map(e => {
         return e.dataValues
     });
-    video.dataValues.comments = comments;
-    return video;
+    return {video, comments};
 };
 
 module.exports.deleteVideo = async (contrain) => {
