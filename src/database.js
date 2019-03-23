@@ -43,6 +43,7 @@ db.QuestionModel = require('./model/question')(sequelize, Sequelize);
 db.AnswerModel = require('./model/answer')(sequelize, Sequelize);
 db.QuizModel = require('./model/quiz')(sequelize, Sequelize);
 db.DocumentModel = require('./model/document')(sequelize, Sequelize);
+db.UserQuestionModel = require('./model/user_question')(sequelize, Sequelize);
 
 /* associations */
 

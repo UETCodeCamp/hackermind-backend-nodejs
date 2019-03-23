@@ -12,9 +12,8 @@ module.exports.updateQuiz = async (contrain, payload) => {
     return quiz;
 };
 
-module.exports.getQuiz = async (contrain) => {
-    console.log(contrain);
-    const quiz = await db.QuizModel.findOne({
+module.exports.getQuiz = async (contrain, user_id, is_do) => {
+    let quiz = await db.QuizModel.findOne({
         where: contrain,
         include: [
             {
@@ -35,5 +34,21 @@ module.exports.getQuiz = async (contrain) => {
             [db.QuestionModel, 'create_time', 'ASC']
         ]
     });
+    if(is_do){
+        quiz = quiz.dataValues;
+        quiz.questions = quiz.questions.map(e => {
+            return e.dataValues
+        });
+        let i=0;
+        for(i=0; i<quiz.questions.length; i++){
+            const user_question = await db.UserQuestionModel.findOne({
+                where: {
+                    user_id: user_id,
+                    question_id: quiz.questions[i].id
+                }
+            });
+            quiz.questions[i].choose_answer = user_question.dataValues.choose_answer
+        }
+    }
     return quiz;
 };
