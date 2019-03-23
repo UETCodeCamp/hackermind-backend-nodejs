@@ -83,7 +83,7 @@ module.exports.getTeamMate = async (contrain) => {
             id: contrain.team_id
         }
     });
-    const team_users = await db.TeamUserModel.findll({
+    const team_users = await db.TeamUserModel.findAll({
         where: contrain
     });
     let user_id = team_users.map(e => {
