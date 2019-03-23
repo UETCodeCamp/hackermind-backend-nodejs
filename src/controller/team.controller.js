@@ -90,6 +90,14 @@ async function getUsersInTeam(req, res){
 async function addUserToTeam(req, res){
     const {team_id, user_id} = req.body;
     try{
+         let user = await db.TeamUserModel.findOne({
+            where: {
+                user_id: user_id
+            }
+        });
+         if(user){
+             throw new Error("Sinh viên này đã có team.");
+         }
         const contrain = {
             team_id: team_id,
             user_id: user_id
@@ -102,7 +110,7 @@ async function addUserToTeam(req, res){
         if(!team){
             throw new Error("Team này không tồn tại .");
         }
-        let  user = await User.findUser({id: user_id});
+        user = await User.findUser({id: user_id});
         if(!user){
             throw new Error("Không tồn tại sinh viên này .");
         }

@@ -119,10 +119,55 @@ async function removeTeamFromCourse(req, res){
         return res.json(response.fail(err.message));
     }
 }
+
+
+async function checkActiveToLearn(req, res){
+    const {course_id} = req.params;
+    try{
+        const team = await db.TeamUserModel.findOne({
+            user_id: req.tokenData.id
+        });
+        const course = await db.TeamCourseModel.findOne({
+            where: {
+                team_id: team.id,
+                course_id: course_id
+            }
+        });
+        if(!course){
+            throw new Error("Bạn không thể tham gia khóa học này.");
+        }
+        else{
+            const chapter = await db.ChapterModel.findAll({
+                where: {
+                    course_id: course_id
+                },
+                order:[
+                    ['create_time', 'ASC']
+                ],
+                limit: 1
+            });
+            const video = await db.VideoModel.findAll({
+                where: {
+                    chapter_id: chapter[0].dataValues.id
+                },
+                order: [
+                    ['create_time', 'ASC']
+                ],
+                limit: 1
+            });
+            return res.json(response.success(video));
+        }
+    }
+    catch(err){
+        console.log("Error: ", err.message);
+        return res.json(response.fail(err.message));
+    }
+}
 module.exports = {
     getAllCourses,
     createCourse,
     putCourse,
     addTeamToCourse,
-    removeTeamFromCourse
+    removeTeamFromCourse,
+    checkActiveToLearn
 };

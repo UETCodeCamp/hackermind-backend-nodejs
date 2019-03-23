@@ -23,14 +23,13 @@ module.exports.getQuiz = async (contrain) => {
                 // order: [
                 //     ['create_time', 'DESC']
                 // ],
-                include: {
-                    model: db.AnswerModel,
-                    required: false
+                include: [{
+                    model: db.AnswerModel
                     // order: [
                     //     ['position', 'DESC']
                     // ],
                     // limit: 2
-                }
+                }]
             }
         ]
     });

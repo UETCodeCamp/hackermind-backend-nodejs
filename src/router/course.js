@@ -13,6 +13,7 @@ router.post('/', middleware.verifyAccessToken, Course.createCourse);
 router.put('/:course_id', middleware.verifyAccessToken, Course.putCourse);
 router.post('/teams', middleware.verifyAccessToken, Course.addTeamToCourse);
 router.delete('/:course_id/teams/:team_id', middleware.verifyAccessToken, Course.removeTeamFromCourse);
+router.get('/:course_id/users', middleware.verifyAccessToken, Course.checkActiveToLearn);
 
 //chapter
 router.get('/:course_id/chapters', middleware.verifyAccessToken, Chapter.getChapters);

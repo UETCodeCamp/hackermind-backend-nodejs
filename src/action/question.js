@@ -16,7 +16,7 @@ module.exports.getQuizzes = async (contrain) => {
     const quizzes = await db.QuizModel.findAll({
         where: contrain,
         order: [
-            ['create_time', 'DESC']
+            ['create_time', 'ASC']
         ],
         attributes: ['id','question', 'description', 'url', 'answer_one', 'answer_two', 'answer_three', 'answer_four', 'chapter_id']
     }) ;

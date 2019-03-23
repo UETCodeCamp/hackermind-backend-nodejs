@@ -17,7 +17,7 @@ module.exports.getVideos = async (contrain) => {
     const videos = await db.VideoModel.findAll({
         where: contrain,
         order: [
-            ['create_time', 'DESC']
+            ['create_time', 'ASC']
         ]
     });
     return videos;

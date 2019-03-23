@@ -17,28 +17,28 @@ module.exports.getChapter = async (contrain) => {
     const chapters = await db.ChapterModel.findAll({
         where: contrain,
         order: [
-            ['create_time', 'DESC']
+            ['create_time', 'ASC']
         ],
         include: [
             {
                 model: db.VideoModel,
                 attributes: ['title', 'id'],
                 order: [
-                    ['create_time', 'DESC']
+                    ['create_time', 'ASC']
                 ]
             },
             {
                 model: db.QuizModel,
                 attributes: ['title', 'id'],
                 order: [
-                    ['create_time', 'DESC']
+                    ['create_time', 'ASC']
                 ]
             },
             {
                 model: db.DocumentModel,
                 attributes: ['title', 'id'],
                 order: [
-                    ['create_time', 'DESC']
+                    ['create_time', 'ASC']
                 ]
             }
         ]
