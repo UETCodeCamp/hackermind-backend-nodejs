@@ -16,6 +16,22 @@ async function getAllCourses(req, res) {
     }
 }
 
+
+async function getCourse(req, res) {
+    try{
+        const {course_id} = req.param;
+        const course = await db.CourseModel.findOne({
+            where: {
+                id: course_id
+            }
+        });
+        return res.json(response.success({course}));
+    }
+    catch(err){
+        console.log("Error: ", err.message);
+        return res.json(response.fail(err.message));
+    }
+}
 async function createCourse(req, res){
     try{
         const {description, name, avatar, image} = req.body;
@@ -163,11 +179,14 @@ async function checkActiveToLearn(req, res){
         return res.json(response.fail(err.message));
     }
 }
+
+
 module.exports = {
     getAllCourses,
     createCourse,
     putCourse,
     addTeamToCourse,
     removeTeamFromCourse,
-    checkActiveToLearn
+    checkActiveToLearn,
+    getCourse
 };

@@ -9,6 +9,7 @@ const Document = require('../controller/document.controller');
 const Comment = require('../controller/comment.controller');
 
 router.get('/', middleware.verifyAccessToken, Course.getAllCourses);
+router.get('/:course_id', middleware.verifyAccessToken, Course.getCourse);
 router.post('/', middleware.verifyAccessToken, Course.createCourse);
 router.put('/:course_id', middleware.verifyAccessToken, Course.putCourse);
 router.post('/teams', middleware.verifyAccessToken, Course.addTeamToCourse);
