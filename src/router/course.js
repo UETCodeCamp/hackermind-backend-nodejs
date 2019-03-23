@@ -41,6 +41,7 @@ router.get('/chapters/:chapter_id/documents/:document_id', middleware.verifyAcce
 router.post('/chapters/:chapter_id/quizzes', middleware.verifyAccessToken, Quiz.createQuiz);
 router.put('/chapters/:chapter_id/quizzes/:quiz_id', middleware.verifyAccessToken, Quiz.putQuiz);
 router.get('/chapters/:chapter_id/quizzes/:quiz_id', middleware.verifyAccessToken, Quiz.getQuiz);
+router.post('/chapters/quizzes/:quiz_id/check_answer', middleware.verifyAccessToken, Quiz.checkQuiz);
 
 //question
 router.post('/chapters/quizzes/:quiz_id/questions', middleware.verifyAccessToken, Question.createQuestion);

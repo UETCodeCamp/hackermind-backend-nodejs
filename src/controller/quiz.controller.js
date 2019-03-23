@@ -1,5 +1,6 @@
 const response = require('../utils/response');
 const Quiz = require('../action/quiz');
+const db = require('../database');
 
 async function createQuiz(req, res) {
       const {chapter_id} = req.params;
@@ -57,8 +58,35 @@ async function getQuiz(req, res){
     }
 }
 
+async function checkQuiz(req, res){
+    const {quiz_id} = req.params;
+    const {questions} = req.body;
+    try{
+        let count = 0;
+        let i=0;
+        for(i=0; i < questions.length; i++){
+            let question = await db.QuestionModel.findOne({
+                where: {
+                    id: questions[i].question_id
+                }
+            });
+            let answer_correct = question.answer_correct.split(',');
+            if(answer_correct.length === questions[i].choose_answer.length){
+                count++;
+            }
+            console.log(count);
+        }
+        return res.json(response.success({}));
+    }
+    catch(err){
+        console.log("Error: ", err);
+        return res.json(response.fail(err.message))
+    }
+}
+
 module.exports = {
     createQuiz,
     putQuiz,
-    getQuiz
+    getQuiz,
+    checkQuiz
 };

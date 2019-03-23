@@ -16,7 +16,6 @@ async function getAllCourses(req, res) {
     }
 }
 
-
 async function getCourse(req, res) {
     try{
         const {course_id} = req.params;
@@ -25,6 +24,7 @@ async function getCourse(req, res) {
                 id: course_id
             }
         });
+        console.log(course);
         return res.json(response.success({course}));
     }
     catch(err){
