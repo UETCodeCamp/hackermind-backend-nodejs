@@ -56,5 +56,6 @@ module.exports.getQuiz = async (contrain, user_id, is_do) => {
         quiz.is_do = is_do;
         quiz.point = point;
     }
+    console.log(quiz);
     return quiz;
 };
