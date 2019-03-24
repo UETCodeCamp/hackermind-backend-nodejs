@@ -149,7 +149,7 @@ async function checkActiveToLearn(req, res){
         if(team){
             course = await db.TeamCourseModel.findOne({
                 where: {
-                    team_id: team.dataValues.team_id,
+                    team_id: team.team_id,
                     course_id: course_id
                 }
             });
