@@ -13,6 +13,7 @@ async function register(req, res) {
         email,
         name
     } = req.body;
+    console.log(req.body);
     try {
         if(!user_name || !password || !email || !name){
             throw new Error("Bạn vui lòng điền đủ theo mẫu.")
@@ -25,7 +26,7 @@ async function register(req, res) {
             throw new Error("Mật khẩu phải có ít nhất 8 kí tự.");
         }
         console.log("oki");
-        if (user == null) {
+        if (!user) {
             let salt = await bcrypt.genSalt(10);
             let hashPassword = await bcrypt.hash(password, salt);
             let payload = {
@@ -121,7 +122,7 @@ async function changePassword(req, res) {
 async function getProfile(req, res) {
     try {
         const user_id = req.tokenData.id;
-        const user = await User.findUser({id: user_id});
+        const user = await User.findUserAndTeam({id: user_id});
         return res.json(response.success({user}));
     } catch (err) {
         console.log("Error: ", err.message);
