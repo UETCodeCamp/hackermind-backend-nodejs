@@ -7,7 +7,7 @@ module.exports = (sequelize, Sequelize) => {
         },
         type: {
             type:   Sequelize.ENUM,
-            values: ['checkbox', 'ratio']
+            values: ['checkbox', 'radio']
         },
         create_time: {
             type: Sequelize.STRING

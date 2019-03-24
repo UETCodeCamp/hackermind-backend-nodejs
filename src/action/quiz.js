@@ -48,6 +48,7 @@ module.exports.getQuiz = async (contrain, user_id, is_do) => {
                     question_id: quiz.questions[i].id
                 }
             });
+            console.log(user_question);
             if(user_question.dataValues.is_correct){
                 point+=10;
             }
