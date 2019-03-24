@@ -21,13 +21,10 @@ async function register(req, res) {
             user_name: user_name
         };
         const user = await User.findUser(contrain);
-        // let pass = /^(?=.*\d)(?=.*[!@#$%_^&*])(?=.*[a-zA-Z]).{8,}$/;
-        // if (!pass.test(password)) {
-        //     return res.json(response.fail("Mật khẩu bao gồm ít nhất 8 kí tự, trong đó chứa ít nhất 1 chữ, 1 số và 1 kí tự đặc biệt"));
-        // }
         if(password.length < 8){
             throw new Error("Mật khẩu phải có ít nhất 8 kí tự.");
         }
+        console.log("oki");
         if (user == null) {
             let salt = await bcrypt.genSalt(10);
             let hashPassword = await bcrypt.hash(password, salt);
@@ -41,6 +38,7 @@ async function register(req, res) {
                 avatar: "/img/avatar.png"
             };
             const newUsers = await User.createUser(payload);
+            console.log(newUsers);
             return res.json(response.success({}));
         }
         else{
