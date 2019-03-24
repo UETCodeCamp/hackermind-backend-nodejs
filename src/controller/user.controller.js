@@ -13,7 +13,6 @@ async function register(req, res) {
         email,
         name
     } = req.body;
-    console.log(req.body);
     try {
         if(!user_name || !password || !email || !name){
             throw new Error("Bạn vui lòng điền đủ theo mẫu.")
