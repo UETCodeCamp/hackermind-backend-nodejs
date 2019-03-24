@@ -5,7 +5,12 @@ const Video = require('../action/video');
 async function createVideo(req, res) {
     try{
         const {chapter_id} = req.params;
-        const {title, url, description} = req.body;
+        let {title, url, description} = req.body;
+        url = url.split('v=')[1];
+        let ampersandPosition = url.indexOf('&');
+        if(ampersandPosition != -1) {
+            url = url.substring(0, ampersandPosition);
+        }
         const payload = {
             title: title,
             url: url,
