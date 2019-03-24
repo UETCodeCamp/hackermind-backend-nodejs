@@ -83,24 +83,28 @@ module.exports.getTeamMate = async (contrain) => {
             id: contrain.team_id
         }
     });
-    const team_users = await db.TeamUserModel.findAll({
-        where: contrain
-    });
-    let user_id = team_users.map(e => {
-        return e.dataValues.user_id
-    });
-    const users = await db.UserModel.findAll({
-        where: {
-            id: {
-                [db.Sequelize.Op.in]: user_id
-            }
-        },
-        attributes: ['name', 'avatar', 'email', 'role_id'],
-        order: [
-            ['role_id', 'ASC']
-        ]
-    });
-    team.dataValues.users = users;
+    if(team){
+        const team_users = await db.TeamUserModel.findAll({
+            where: contrain
+        });
+        if(team_users){
+            let user_id = team_users.map(e => {
+                return e.dataValues.user_id
+            });
+            const users = await db.UserModel.findAll({
+                where: {
+                    id: {
+                        [db.Sequelize.Op.in]: user_id
+                    }
+                },
+                attributes: ['name', 'avatar', 'email', 'role_id'],
+                order: [
+                    ['role_id', 'ASC']
+                ]
+            });
+            team.dataValues.users = users;
+        }
+    }
     return team;
 };
 

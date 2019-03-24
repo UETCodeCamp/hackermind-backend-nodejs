@@ -10,7 +10,9 @@ module.exports.findUserAndTeam = async (contrain) => {
         where: contrain,
         attributes: ['user_name','id', 'avatar', 'name', 'email', 'point', 'description', 'role_id']
     });
-    user.dataValues.team_id = team.team_id;
+    if(team){
+        user.dataValues.team_id = team.dataValues.team_id;
+    }
     return user;
 };
 
