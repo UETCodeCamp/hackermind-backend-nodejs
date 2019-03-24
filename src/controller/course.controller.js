@@ -145,6 +145,7 @@ async function checkActiveToLearn(req, res){
                 user_id: req.tokenData.id
             }
         });
+        console.log('team_user: ',team);
         let course;
         if(team){
             course = await db.TeamCourseModel.findOne({
@@ -154,6 +155,7 @@ async function checkActiveToLearn(req, res){
                 }
             });
         }
+        console.log('course: ', course);
         if(!course){
             throw new Error("Bạn không thể tham gia khóa học này.");
         }
