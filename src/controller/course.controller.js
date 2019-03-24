@@ -167,6 +167,7 @@ async function checkActiveToLearn(req, res){
                 ],
                 limit: 1
             });
+            console.log(chapter[0].dataValues);
             if(chapter.length > 0){
                 const video = await db.VideoModel.findAll({
                     where: {
@@ -177,6 +178,7 @@ async function checkActiveToLearn(req, res){
                     ],
                     limit: 1
                 });
+                console.log(video[0]);
                 return res.json(response.success(video[0]));
             }
             else{
