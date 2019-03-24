@@ -24,7 +24,6 @@ async function getCourse(req, res) {
                 id: course_id
             }
         });
-        console.log(course);
         return res.json(response.success({course}));
     }
     catch(err){
@@ -167,7 +166,6 @@ async function checkActiveToLearn(req, res){
                 ],
                 limit: 1
             });
-            console.log(chapter[0].dataValues);
             if(chapter.length > 0){
                 const video = await db.VideoModel.findAll({
                     where: {
@@ -178,8 +176,8 @@ async function checkActiveToLearn(req, res){
                     ],
                     limit: 1
                 });
-                console.log(video[0]);
-                return res.json(response.success(video[0]));
+
+                return res.json(response.success({video_id: video[0].dataValues.id, chapter_id: chapter[0].dataValues.id}));
             }
             else{
                 throw new Error("Khóa học đang được cập nhật. Vui lòng quay lại sau.");
