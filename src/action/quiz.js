@@ -22,11 +22,11 @@ module.exports.getQuiz = async (contrain, user_id, is_do) => {
                 include: [
                     {
                         model: db.AnswerModel,
-                        attributes: ['position', 'content', 'question_id']
+                        attributes: ['position', 'content', 'question_id'],
+                        order: [
+                            ['position', 'ASC']
+                        ]
                     }
-                ],
-                order: [
-                    [db.AnswerModel, 'position', 'ASC']
                 ]
             }
         ],
