@@ -169,7 +169,7 @@ async function checkActiveToLearn(req, res){
                 ],
                 limit: 1
             });
-            if(chapter){
+            if(chapter.length > 0){
                 const video = await db.VideoModel.findAll({
                     where: {
                         chapter_id: chapter[0].dataValues.id
