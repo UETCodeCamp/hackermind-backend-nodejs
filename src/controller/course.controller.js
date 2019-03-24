@@ -145,12 +145,15 @@ async function checkActiveToLearn(req, res){
                 user_id: req.tokenData.id
             }
         });
-        const course = await db.TeamCourseModel.findOne({
-            where: {
-                team_id: team.id,
-                course_id: course_id
-            }
-        });
+        let course ;
+        if(team){
+            const course = await db.TeamCourseModel.findOne({
+                where: {
+                    team_id: team.dataValues.id,
+                    course_id: course_id
+                }
+            });
+        }
         if(!course){
             throw new Error("Bạn không thể tham gia khóa học này.");
         }
