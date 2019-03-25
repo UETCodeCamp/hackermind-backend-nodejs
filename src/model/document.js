@@ -8,6 +8,12 @@ module.exports = (sequelize, Sequelize) => {
         title: {
             type: Sequelize.STRING
         },
+        type: {
+            type: {
+                type:   Sequelize.ENUM,
+                values: ['markdown', 'pdf']
+            },
+        },
         create_time: {
             type: Sequelize.STRING
         },
@@ -16,6 +22,9 @@ module.exports = (sequelize, Sequelize) => {
         },
         chapter_id: {
             type: Sequelize.INTEGER
+        },
+        url: {
+            type: Sequelize.TEXT
         }
     },{
         freezeTableName: true,

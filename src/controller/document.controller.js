@@ -4,13 +4,15 @@ const db = require('../database');
 
 async function createDocument(req, res) {
     const {chapter_id} = req.params;
-    const {title, content} = req.body;
+    const {title, content, type, url} = req.body;
     try{
         const payload = {
             title: title,
             content: content,
             create_time: Date.now(),
-            chapter_id: chapter_id
+            chapter_id: chapter_id,
+            type: type,
+            url: url
         };
         const document = await db.DocumentModel.create(payload);
         return res.json(response.success({}));
@@ -23,11 +25,13 @@ async function createDocument(req, res) {
 
 async function putDocoment(req, res){
     const {chapter_id, document_id} = req.params;
-    const {title, content} = req.body;
+    const {title, content, type, url} = req.body;
     try{
         const payload = {
             title: title,
-            content: content
+            content: content,
+            type: type,
+            url: url
         };
         const contrain = {
             id: document_id,
