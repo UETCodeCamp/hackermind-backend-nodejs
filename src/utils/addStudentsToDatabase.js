@@ -61,13 +61,14 @@ module.exports.autoAdd = async (req, res) => {
                         if(jsonFile[i].email && jsonFile[i].phone){
                             let salt = await bcrypt.genSalt(10);
                             let hashPassword = await bcrypt.hash(jsonFile[i].phone, salt);
+                            let email = jsonFile[i].email.toLowerCase();
                             let user = await db.UserModel.findOrCreate({
                                 where: {
-                                    user_name: jsonFile[i].email
+                                    user_name: email
                                 },
                                 defaults: {
-                                    user_name: jsonFile[i].email,
-                                    email: jsonFile[i].email,
+                                    user_name: email,
+                                    email: email,
                                     name: jsonFile[i].name,
                                     password: hashPassword,
                                     role_id: 3,
