@@ -14,6 +14,7 @@ async function register(req, res) {
         name
     } = req.body;
     try {
+        throw new Error("Version 1 don't support!");
         if(!user_name || !password || !email || !name){
             throw new Error("Bạn vui lòng điền đủ theo mẫu.")
         }
