@@ -9,10 +9,8 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING
         },
         type: {
-            type: {
-                type:   Sequelize.ENUM,
-                values: ['markdown', 'pdf']
-            },
+            type:   Sequelize.ENUM,
+            values: ['markdown', 'pdf']
         },
         create_time: {
             type: Sequelize.STRING
