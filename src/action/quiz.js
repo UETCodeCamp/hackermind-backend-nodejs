@@ -48,8 +48,7 @@ module.exports.getQuiz = async (contrain, user_id, is_do) => {
                     question_id: quiz.questions[i].id
                 }
             });
-            console.log(user_question);
-            if(user_question.dataValues.is_correct){
+            if(user_question.dataValues.is_correct === "true"){
                 point+=10;
             }
             quiz.questions[i].choose_answer = user_question.dataValues.choose_answer
@@ -57,6 +56,5 @@ module.exports.getQuiz = async (contrain, user_id, is_do) => {
         quiz.is_do = is_do;
         quiz.point = point;
     }
-    console.log(quiz);
     return quiz;
 };
